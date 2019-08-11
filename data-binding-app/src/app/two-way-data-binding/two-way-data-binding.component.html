@@ -1,0 +1,49 @@
+<section>
+    <mat-card style="margin: 20px">
+        <mat-card-content>
+            <form>
+                <mat-form-field style="width: 100%">
+                    <input matInput placeholder="Enter your name" [(ngModel)]="name1" name="anyname1">
+                </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <input matInput placeholder="Enter your name" [(ngModel)]="name2" name="anyname2">
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <p>{{name1}}</p>
+            <p>{{name2}}</p>
+        </mat-card-actions>
+    </mat-card>
+</section>
+
+
+<section>
+    <mat-card style="margin: 20px">
+        <mat-card-title>
+            Client
+        </mat-card-title>
+        <mat-card-content>
+            <form>
+                <mat-form-field style="width: 100%">
+                    <input matInput placeholder="Primeiro nome" name="primeiroNome" [(ngModel)]="client.firstName">
+                </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <input matInput placeholder="Ultimo nome" name="ultimoNome" [(ngModel)]="client.lastName">
+                </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <input matInput placeholder="Endereço" name="endereco" [(ngModel)]="client.address">
+                </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <input matInput placeholder="Idade" name="idade" [(ngModel)]="client.age">
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <p>Nome: {{client.firstName}}</p>
+            <p>Ultimo nome: {{client.lastName}}</p>
+            <p>Endereço: {{client.address}}</p>
+            <p>Idade: {{client.age}}</p>
+        </mat-card-actions>
+    </mat-card>
+</section>
