@@ -24,7 +24,7 @@ export class GenRandomDataService {
           } else {
             observer.complete();
           }
-        }
+        };
         dataFunction();
       }
     ).pipe(publish()) as ConnectableObservable<DataModel>;

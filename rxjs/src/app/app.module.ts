@@ -47,13 +47,22 @@ import { BasicCreationComponent } from './basic-creation/basic-creation.componen
 import { FormsModule } from '@angular/forms';
 import { OperatorsComponent } from './operators/operators.component';
 import { AsyncComponent } from './async/async.component';
+import { ErrorHandlingComponent } from './error-handling/error-handling.component';
+import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
+import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
+import { SwitchMergeComponent } from './switch-merge/switch-merge.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     BasicCreationComponent,
     OperatorsComponent,
-    AsyncComponent
+    AsyncComponent,
+    ErrorHandlingComponent,
+    DragAndDropComponent,
+    UnsubscribeComponent,
+    SwitchMergeComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +104,8 @@ import { AsyncComponent } from './async/async.component';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

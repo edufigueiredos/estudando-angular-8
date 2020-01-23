@@ -27,7 +27,7 @@ export class ColdObservablesComponent implements OnInit {
           i++;
           console.log('from Observable: ', i);
           if (i === 10) {
-            observer.next(i)
+            observer.next(i);
             observer.complete();
           } else if (i % 2 === 0) {
             observer.next(i);
@@ -47,7 +47,7 @@ export class ColdObservablesComponent implements OnInit {
     );
 
     this.s2 = 'Waiting for Interval...'
-    setInterval(() => {
+    setTimeout(() => {
       this.subscription2 = myIntervalObservable.subscribe(
         (_n) => { this.n2 = _n; },
         (error) => { this.s2 = 'Error: ' + error; },
@@ -55,10 +55,10 @@ export class ColdObservablesComponent implements OnInit {
       );
     }, 3000);
 
-    setTimeout(() => {
-      this.subscription1.unsubscribe();
-      this.subscription2.unsubscribe();
-    }, 10000);
+    // setTimeout(() => {
+    //   this.subscription1.unsubscribe();
+    //   this.subscription2.unsubscribe();
+    // }, 10000);
 
   }
 

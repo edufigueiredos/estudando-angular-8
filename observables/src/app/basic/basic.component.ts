@@ -25,7 +25,7 @@ export class BasicComponent implements OnInit {
       observer.next(3);
       observer.next(4);
       observer.next(5);
-      observer.error('error here');
+      // observer.error('error here');
       observer.complete();
     });
     myFirstObservable.subscribe((n: number) =>

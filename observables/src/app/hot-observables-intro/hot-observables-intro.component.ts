@@ -10,30 +10,27 @@ export class HotObservablesIntroComponent implements OnInit {
 
   @ViewChild('myButton', { static: true }) button: ElementRef;
 
-  n1 = 0;
-  n2 = 0;
-  s1 = '';
-  s2 = '';
-
   constructor() { }
 
   ngOnInit() {
     const myBtnClickObservable: Observable<any> = fromEvent(
       this.button.nativeElement, 'click');
     myBtnClickObservable.subscribe(event => {
-      console.log('Button clicked 1')
+      console.log('Button clicked 1');
     });
     myBtnClickObservable.subscribe(event => {
-      console.log('Button clicked 2')
+      console.log('Button clicked 2');
     });
 
     class Producer {
+
+      // myListeners é um array de Functions
       private myListeners = [];
       private n = 0;
       private id: any;
 
-      addListener(l) {
-        this.myListeners.push(l);
+      addListener(functionReceived) {
+        this.myListeners.push(functionReceived);
         console.warn('LENGTH LISTENER ', this.myListeners.length);
       }
 
@@ -41,9 +38,11 @@ export class HotObservablesIntroComponent implements OnInit {
         this.id = setInterval(() => {
           this.n++;
           console.log('From Producer: ' + this.n);
-          for (let l of this.myListeners) {
-            l(this.n);
+          for (const functionParameter of this.myListeners) {
+            functionParameter(this.n);
           }
+
+          console.log(this.myListeners);
         }, 1000);
       }
 
@@ -56,12 +55,12 @@ export class HotObservablesIntroComponent implements OnInit {
     producer.start();
 
     setTimeout(() => {
-      producer.addListener((n) => {
-        console.log('From listener 1 ', n);
-      })
-      producer.addListener((n) => {
-        console.log('From listener 2 ', n);
-      })
+      producer.addListener((consoleLogFunction) => {
+        console.log('From listener 1 ', consoleLogFunction);
+      });
+      producer.addListener((consoleLogFuncion) => {
+        console.log('From listener 2 ', consoleLogFuncion);
+      });
     }, 4000);
 
     const myHotObservable = new Observable(
@@ -76,5 +75,6 @@ export class HotObservablesIntroComponent implements OnInit {
       console.log('From Subscriber 2 ', n);
     });
 
+    setTimeout(() => { producer.stop(); }, 10000);
   }
 }

@@ -40,7 +40,8 @@ export class SubjectChildComponent implements OnInit {
   }
 
   disconnect() {
-
+    this.subscription.unsubscribe();
+    this.connected = false;
   }
 
 }
