@@ -1,0 +1,63 @@
+<mat-card fxFlex>
+    <mat-card-title>Products Form</mat-card-title>
+    <mat-card-content>
+        <form #formRef="ngForm" [formGroup]="productForm" (ngSubmit)="saveProduct()" fxLayout="column" fxLayoutAlign="space-between">
+            <input type="hidden" formControlName="_id">
+            <mat-form-field>
+                <input matInput formControlName="name" placeholder="Product name">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput formControlName="stock" placeholder="Stock" type="number">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput formControlName="price" placeholder="Price" type="number">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select placeholder="Departments" formControlName="departments" multiple>
+                    <mat-select-trigger>
+                        {{productForm?.get('departments')?.value ? productForm?.get('departments')?.value[0]?.name : ''}}
+                        <span *ngIf="productForm?.get('departments')?.value?.length > 1" class="aditional-selection">
+                            (+{{productForm?.get('departments')?.value?.length - 1}}
+                            {{productForm?.get('departments')?.value?.lenght === 2 ? 'other' : 'others'}})
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let department of departments" [value]="department">
+                        {{department.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div fxLayout="row" fxLayoutAlign="end end">
+                <button mat-button color="primary" fxFlex="10" type="submit">Save</button>
+                <button mat-button color="warn" fxFlex="10" type="reset">Cancel</button>
+            </div>
+        </form>
+
+        <ng-container *ngIf="products?.length; else noProducts">
+            <mat-list>
+                <h3 mat-subheader>Products</h3>
+                <mat-list-item *ngFor="let product of products">
+                    <mat-icon mat-list-icon>folder</mat-icon>
+                    <h4 mat-line>Name: {{product.name}}</h4>
+                    <h4 mat-line>Price: {{product.price | currency:"R$"}}</h4>
+                    <h4 mat-line>Stock: {{product.stock}}</h4>
+                    <mat-chip-list mat-line>
+                        <mat-chip *ngFor="let department of product.departments">
+                            {{department?.name}}
+                        </mat-chip>
+                    </mat-chip-list>
+                    <button mat-icon-button color="accent" (click)="deleteProduct(product)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" (click)="editProduct(product)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </mat-list-item>
+            </mat-list>
+        </ng-container>
+        <ng-template #noProducts>
+            <div><em>Empty</em></div>
+        </ng-template>
+    </mat-card-content>
+</mat-card>
